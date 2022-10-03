@@ -5,7 +5,7 @@ public class Palindrom {
     public static void main(String[] args)
     {
         String tst = "";
-        for (int i = 0; i < 100000; ++i) {
+        for (int i = 0; i < 1000000; ++i) {
             tst += (int) (Math.random() * 9);
         }
         tst += reverseString(tst);
@@ -13,10 +13,24 @@ public class Palindrom {
         System.out.println(isPalindrom(tst));
         long elapsedTime_1 = System.nanoTime() - startTime;
         System.out.println("Время выполнения скрипта с j variable: " + elapsedTime_1/1000000);
+
         startTime = System.nanoTime();
         System.out.println(isPalindromWithoutJ(tst));
         long elapsedTime_2 = System.nanoTime() - startTime;
         System.out.println("Время выполнения скрипта без j variable: " + elapsedTime_2/1000000);
+
+        System.out.println("Классические варианты без использования коллекций:");
+
+        startTime = System.nanoTime();
+        System.out.println(isPalindromClassicWithJ(tst));
+        long elapsedTime_3 = System.nanoTime() - startTime;
+        System.out.println("Время выполнения скрипта с j variable: " + elapsedTime_3/1000000);
+
+        startTime = System.nanoTime();
+        System.out.println(isPalindromWithoutJ(tst));
+        long elapsedTime_4 = System.nanoTime() - startTime;
+        System.out.println("Время выполнения скрипта без j variable: " + elapsedTime_4/1000000);
+
         /*
         String[] tests = {"1221", "1234", "1", "11", "121", "122", null};
         for (String test : tests)
@@ -46,6 +60,28 @@ public class Palindrom {
         for (int i = 0; charsValue.size() - 1 - i >= i; ++i)
         {
             if (charsValue.get(i) != charsValue.get(charsValue.size() - 1 - i)) return false;
+        }
+        return true;
+    }
+
+    public static boolean isPalindromClassicWithJ(final String value) throws NullPointerException
+    {
+        if (value == null) throw new NullPointerException("value cannot bbe null");
+        final char[] charsValue = value.toCharArray();
+        for (int i = 0, j = charsValue.length - 1; j > i; ++i, --j)
+        {
+            if (charsValue[i] != charsValue[j]) return false;
+        }
+        return true;
+    }
+
+    public static boolean isPalindromClassicWithoutJ(final String value) throws NullPointerException
+    {
+        if (value == null) throw new NullPointerException("value cannot bbe null");
+        final char[] charsValue = value.toCharArray();
+        for (int i = 0; charsValue.length-1-i > i; ++i)
+        {
+            if (charsValue[i] != charsValue[charsValue.length-1-i]) return false;
         }
         return true;
     }
